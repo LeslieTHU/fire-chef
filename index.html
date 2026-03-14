@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔥 火爆厨神 — 极客菜谱库</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+</head>
+<body>
+
+  <!-- ========== 主厨模式横幅 ========== -->
+  <div id="chef-banner" class="chef-banner hidden">
+    <span class="chef-banner-icon">👨‍🍳</span>
+    <span>主厨模式已激活 — 完整做法 &amp; 避坑指南已解锁</span>
+  </div>
+
+  <!-- ========== 移动端顶部栏 ========== -->
+  <header class="mobile-header">
+    <button id="menu-toggle" class="hamburger" aria-label="打开菜单">
+      <span></span><span></span><span></span>
+    </button>
+    <h1 class="mobile-title">🔥 火爆厨神</h1>
+  </header>
+
+  <!-- ========== 侧边栏遮罩 ========== -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <!-- ========== 左侧边栏 ========== -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h1 class="logo">🔥 火爆厨神</h1>
+      <p class="logo-sub">极客菜谱库 · Geek Recipe Hub</p>
+    </div>
+    <nav id="category-nav" class="category-nav">
+      <!-- JS 动态渲染分类按钮 -->
+    </nav>
+    <div class="sidebar-footer">
+      <p>URL 加上 <kbd>?mode=chef</kbd></p>
+      <p>解锁主厨模式 🔓</p>
+    </div>
+  </aside>
+
+  <!-- ========== 主内容区 ========== -->
+  <main id="main-content" class="main-content">
+    <!-- 分类标题区 -->
+    <section id="category-header" class="category-header">
+      <h2 id="category-title" class="category-title">加载中...</h2>
+      <p id="category-desc" class="category-desc"></p>
+    </section>
+
+    <!-- 菜品卡片网格 -->
+    <section id="recipe-grid" class="recipe-grid">
+      <!-- JS 动态渲染菜品卡片 -->
+    </section>
+  </main>
+
+  <!-- ========== Footer ========== -->
+  <footer class="site-footer">
+    <p>Created by <strong>Leslie</strong> · Powered by <strong>GitHub Pages</strong></p>
+  </footer>
+
+  <!-- ========== Toast 通知 ========== -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

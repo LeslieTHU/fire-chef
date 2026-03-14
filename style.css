@@ -1,0 +1,577 @@
+/* ============================================================
+   🔥 火爆厨神 — 全局样式
+   风格：明亮清爽 Light Mode，厨房场景友好
+   ============================================================ */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --color-bg: #f5f0eb;
+  --color-surface: #ffffff;
+  --color-text: #2c2c2c;
+  --color-text-light: #666666;
+  --color-accent: #e74c3c;
+  --color-accent-hover: #c0392b;
+  --color-accent-soft: #fff5f5;
+  --color-border: #e8e0d8;
+  --color-sidebar-bg: #fffaf6;
+  --color-badge-default: #8e44ad;
+  --sidebar-width: 260px;
+  --header-height: 56px;
+  --radius: 12px;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 6px 24px rgba(0, 0, 0, 0.1);
+  --transition: 0.25s ease;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ---------- Chef Mode Banner ---------- */
+.chef-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #e74c3c, #f39c12);
+  color: #fff;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 12px rgba(231, 76, 60, 0.3);
+}
+
+.chef-banner.hidden {
+  display: none;
+}
+
+.chef-banner-icon {
+  font-size: 22px;
+}
+
+/* When chef banner is visible, push everything down */
+body.chef-mode {
+  padding-top: 44px;
+}
+
+body.chef-mode .sidebar {
+  top: 44px;
+  height: calc(100vh - 44px);
+}
+
+body.chef-mode .mobile-header {
+  top: 44px;
+}
+
+/* ---------- Mobile Header ---------- */
+.mobile-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 800;
+  height: var(--header-height);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+
+.mobile-title {
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+/* Hamburger Button */
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 28px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ---------- Sidebar Overlay (mobile) ---------- */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 899;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--color-sidebar-bg);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  z-index: 900;
+  overflow-y: auto;
+  transition: transform var(--transition);
+}
+
+.sidebar-header {
+  padding: 28px 20px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.logo-sub {
+  font-size: 12px;
+  color: var(--color-text-light);
+  margin-top: 4px;
+}
+
+/* Category Nav */
+.category-nav {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+  width: 100%;
+}
+
+.nav-btn:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.nav-btn.active {
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.25);
+}
+
+.nav-btn .nav-icon {
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--color-border);
+  font-size: 12px;
+  color: var(--color-text-light);
+  text-align: center;
+  line-height: 1.8;
+}
+
+.sidebar-footer kbd {
+  background: var(--color-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 11px;
+  border: 1px solid var(--color-border);
+}
+
+/* ---------- Main Content ---------- */
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: 32px 36px 80px;
+  min-height: 100vh;
+}
+
+/* Category Header */
+.category-header {
+  margin-bottom: 28px;
+}
+
+.category-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.category-desc {
+  font-size: 15px;
+  color: var(--color-text-light);
+  margin-top: 6px;
+}
+
+/* ---------- Recipe Card Grid ---------- */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* ---------- Recipe Card ---------- */
+.recipe-card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.recipe-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Card Image */
+.card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: var(--color-bg);
+}
+
+.card-image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+/* Card Body */
+.card-body {
+  padding: 20px;
+}
+
+/* Card Title Row */
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.card-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* Region Badge */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Badge color map */
+.badge-川菜 { background: #e74c3c; }
+.badge-湘菜 { background: #e67e22; }
+.badge-粤菜 { background: #27ae60; }
+.badge-本帮菜 { background: #8e44ad; }
+.badge-鲁菜 { background: #2980b9; }
+.badge-东北菜 { background: #16a085; }
+.badge-西北菜 { background: #d35400; }
+.badge-闽菜 { background: #c0392b; }
+.badge-经典家常 { background: #e67e22; }
+.badge-东南亚菜 { background: #1abc9c; }
+.badge-轻食西餐 { background: #3498db; }
+.badge-日韩料理 { background: #9b59b6; }
+.badge-default { background: var(--color-badge-default); }
+
+/* Card Meta */
+.card-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--color-text-light);
+}
+
+.card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Ingredients Section */
+.ingredients-section {
+  margin-bottom: 16px;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ingredient-group {
+  margin-bottom: 10px;
+}
+
+.ingredient-group-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.ingredient-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ingredient-tag {
+  background: var(--color-bg);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+/* Copy Button */
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 2px dashed var(--color-accent);
+  border-radius: 8px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 4px;
+}
+
+.copy-btn:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-style: solid;
+}
+
+.copy-btn:active {
+  transform: scale(0.96);
+}
+
+/* ---------- Steps Section (Chef Mode Only) ---------- */
+.steps-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--color-border);
+}
+
+.steps-list {
+  list-style: none;
+  counter-reset: step-counter;
+}
+
+.steps-list li {
+  counter-increment: step-counter;
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.steps-list li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tips Section (Chef Mode Only) */
+.tips-section {
+  margin-top: 16px;
+  background: #fffbea;
+  border-left: 4px solid #f1c40f;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+}
+
+.tips-section .section-label {
+  color: #e67e22;
+}
+
+.tips-content {
+  font-size: 14px;
+  color: #7d6608;
+  line-height: 1.7;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  margin-left: var(--sidebar-width);
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 13px;
+  color: var(--color-text-light);
+  border-top: 1px solid var(--color-border);
+}
+
+.site-footer strong {
+  color: var(--color-text);
+}
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #2c3e50;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast.hidden {
+  display: block;
+  opacity: 0;
+}
+
+/* ============================================================
+   📱 Responsive — Mobile First Breakpoint
+   ============================================================ */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 80px 16px 80px;
+  }
+
+  body.chef-mode .main-content {
+    padding-top: calc(var(--header-height) + 52px);
+  }
+
+  .site-footer {
+    margin-left: 0;
+  }
+
+  .recipe-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .category-title {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-header {
+    display: none !important;
+  }
+}

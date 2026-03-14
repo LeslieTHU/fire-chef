@@ -1,0 +1,48 @@
+# 🔥 火爆厨神 - GitHub Pages 自动部署
+# 每次 push 到 main 分支时自动部署，也支持手动触发
+
+name: Deploy to GitHub Pages
+
+on:
+  # push 到 main 分支时自动触发
+  push:
+    branches: ["main"]
+  # 允许在 GitHub 网页上手动触发
+  workflow_dispatch:
+
+# 权限设置：读取仓库内容 + 写入 Pages + OIDC token
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 并发控制：连续 push 时取消前一次部署，只保留最新的
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: 拉取仓库代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: 配置 GitHub Pages
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # Step 3: 打包整个仓库根目录为构建产物（纯静态，无需 build）
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      # Step 4: 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
